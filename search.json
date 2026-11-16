@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Exploring Baseball Through Data",
+    "section": "",
+    "text": "Welcome! This site explores over a century of Major League Baseball history using the Lahman Baseball Database. Tracking league-wide power over time reveals a steady, dramatic rise in home-run hitting — and shows why rates matter more than raw counts: sharp drops in seasons like 1981, 1994, and 2020 were caused by shortened schedules, disappearing completely once we measure home runs per game.\nTurning to individual players, the all-time career leaderboard highlights how strongly the Steroid Era (1994–2009) reshaped baseball’s record books. Most of the top 15 sluggers in history played during those years, led by Barry Bonds with 762 career home runs and a late-career peak of 73 in 2001. Use the Home runs and Sluggers links in the navigation bar above to explore the full charts and analysis."
+  },
+  {
+    "objectID": "home-runs.html",
+    "href": "home-runs.html",
+    "title": "Home runs",
+    "section": "",
+    "text": "Warning: Removed 1 row containing missing values or values outside the scale range\n(`geom_point()`)."
+  }
+]
