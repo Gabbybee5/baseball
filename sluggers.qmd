@@ -1,0 +1,60 @@
+---
+title: "Sluggers"
+---
+
+```{r}
+#| message: false
+library(tidyverse)
+library(Lahman)
+```
+
+```{r}
+Batting |>
+  as_tibble() |>
+  summarize(
+    career_hr = sum(HR),
+    first_year = min(yearID),
+    last_year = max(yearID),
+    .by = playerID
+  ) |>
+  slice_max(career_hr, n = 15) |>
+  left_join(People, by = "playerID") |> # attach names from the People table
+  mutate(
+    player = fct_reorder(paste(nameFirst, nameLast), career_hr), # put top leader at the top of y-axis
+    steroid_era = if_else(
+      last_year >= 1994 & first_year <= 2009,
+      "Active (1994–2009)",
+      "Other eras"
+    ) # check whether career overlapped 1994 to 2009
+  ) |>
+  ggplot(aes(x = career_hr, y = player, fill = steroid_era)) +
+  geom_col() +
+  scale_fill_manual(
+    values = c("Active (1994–2009)" = "firebrick", "Other eras" = "steelblue")
+  ) +
+  labs(
+    title = "MLB All-Time Career Home Run Leaders",
+    subtitle = "Top 15 sluggers, colored by whether their career overlapped the Steroid Era (1994–2009)",
+    x = "Career Home Runs",
+    y = "Player",
+    fill = "Steroid Era",
+    caption = "Source: Lahman Baseball Database"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+Batting |>
+  as_tibble() |>
+  left_join(People, by = "playerID") |>
+  filter(nameFirst == "Barry", nameLast == "Bonds") |> # keep only Barry Bonds's seasons
+  ggplot(aes(x = yearID, y = HR)) +
+  geom_col(fill = "firebrick") + # draw one bar per season
+  labs(
+    title = "Barry Bonds's Home Runs by Season (1986–2007)",
+    x = "Season",
+    y = "Home Runs",
+    caption = "Source: Lahman Baseball Database"
+  ) +
+  theme_minimal()
+```
