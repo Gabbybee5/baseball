@@ -12,6 +12,7 @@ library(Lahman)
 #| cache: true
 hr_by_season <- Teams |>
   as_tibble() |>
+  filter(!is.na(HR)) |> # drop team rows where HR was not recorded
   summarize(
     total_hr = sum(HR),
     total_games = sum(G),
@@ -47,6 +48,7 @@ hr_by_season |>
 ```
 
 ```{r}
+#| output: false
 Teams |>
   as_tibble() |>
   filter(yearID %in% c(1981, 1994, 2019, 2020)) |> # keep only the four seasons to compare
